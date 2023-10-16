@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Clean Blog - Start Bootstrap Theme</title>
+        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+        <!-- Font Awesome icons (free version)-->
+        <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+        <!-- Google fonts-->
+        <link href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="css/styles.css" rel="stylesheet" />
+    </head>
+    <body>
+        <!-- Navigation-->
+        <nav class="navbar navbar-expand-lg navbar-light" id="mainNav">
+            <div class="container px-4 px-lg-5">
+                <a class="navbar-brand" href="index.html">Yahoos Dev Log</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                    Menu
+                    <i class="fas fa-bars"></i>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav ms-auto py-4 py-lg-0">
+                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="index.html">Home</a></li>
+                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="about.html">About</a></li>
+                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <!-- Page Header-->
+        <header class="masthead" style="background-image: url('assets/img/blogShot.png')">
+            <div class="container position-relative px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-md-10 col-lg-8 col-xl-7">
+                        <div class="post-heading">
+                            <h1>NetEscape</h1>
+                            <h2 class="subheading">string clicheText = Welcome, you've got mail;</h2>
+                            <span class="meta">
+                                Posted by
+                                <a href="#!">Kevin</a>
+                                October 15th, 2023
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- Post Content-->
+        <article class="mb-4">
+            <div class="container px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-md-10 col-lg-8 col-xl-7">
+                        <h1>It Begins</h1>
+                        <p>Initially, I had programmed a very basic text based game in C# that ran in console. However, while creating the enemy class I felt like I could make something a bit more unique. This is where the 90’s desktop/virus theme came into play. 
+                            To start, I create the image using quick Google searches of Windows 98 search bars and icons as well as application shots of AOL Instant Messenger and Windows Media Player, I’m not sure if the timeline lines up completely, so for lore purposes let’s just pretend. To add some character, I grabbed a sweet Sailer moon picture for the wallpaper, a Bubsy 3D icon for the AIM user and a photo of that computer virus from the first season of Buffy the Vampire Slayer.
+                            <br><br>
+                            After building my canvas in unity, I added separate images for the Media Player and AIM application. I created three text features, one is named enemyText and simply prints the enemy’s output within the AIM console, with a second to display the users input which comes from the third text option which was created using an input field. Finally, I created four buttons (the send button for AIM, the play button for the Media Player, and a desktop icon for each). I simply copied the button images in Paint 3D and saved them as independent images to use as decals for each button for “seamless” blending. 
+                            Now for the fun part. 
+                            <br><br>
+                            The first script I wrote, titled OpenPrograms, is a public class using MonoBehavior. This class simply runs a method titled OpenPanel and checks if Panel != null, in which case we use the SetActive(true) feature. I then of course attach this script to my AIM desktop icon and use the On Click feature to open the panel. I also use this script for the media player.
+                            Next up, I built an audioController that is responsible for playing audio upon request and will also shoot back a LogWarning if the name of the file is not found. 
+                            I built another class called textTransfer that runs a Coroutine. In the Coroutine we run a WaitForSeconds followed by printing the first message from the character named simply “Virus”. Open showing the message we play an audio clip that sounds as close to an AIM sound as I could find on Itch, and let’s be honest, anyone with that sick wallpaper would almost certainly have a bespoke message alert tone anyway. 
+                            The other two buttons (send message and play music) are built similarly to the previous two, but rather than opening a window they complete an action. The Media Player button starts playing a weird funk song I found on Itch, and the send message button takes the text entered in the input field and prints it in the AIM display under userText. 
+                            <br><br>
+                            Next weekend I plan on rewriting that text-based game to play in the AIM console and add features such as screen shake (can be done by building a script attached to the camera) and adding some cool sound effects. 
+                            <br><br>
+                            -	Kevin
+                            
+                            
+                           </p>
+                 
+                           
+                         
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </article>
+        <!-- Footer-->
+        <footer class="border-top">
+            <div class="container px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-md-10 col-lg-8 col-xl-7">
+                        <ul class="list-inline text-center">
+                            
+                            <li class="list-inline-item">
+                                <a href="https://github.com/YahooSilverman/">
+                                    <span class="fa-stack fa-lg">
+                                        <i class="fas fa-circle fa-stack-2x"></i>
+                                        <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                                    </span>
+                                </a>
+                            </li>
+                        </ul>
+                        <div class="small text-center text-muted fst-italic">Copyright &copy; Why would anyone steal this 2023</div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Core theme JS-->
+        <script src="js/scripts.js"></script>
+    </body>
+</html>
