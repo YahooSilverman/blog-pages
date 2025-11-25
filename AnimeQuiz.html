@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inline JavaScript Quiz Game</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .quiz-container {
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        .question-image {
+            max-width: 100%;
+            margin-bottom: 10px;
+        }
+
+        .answers label {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        #submit-btn {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        #submit-btn:hover {
+            background-color: #45a049;
+        }
+
+        #result {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="quiz-container">
+        <h1>Inline JavaScript Quiz Game</h1>
+        <div id="question-container"></div>
+        <button id="submit-btn">Submit</button>
+        <div id="result"></div>
+    </div>
+
+    <script>
+        const questions = [
+            {
+                question: "What is the best-selling video game of all time?",
+                image: "https://via.placeholder.com/300",
+                answers: ["Minecraft", "Tetris", "Grand Theft Auto V", "Wii Sports"],
+                correctAnswer: "Minecraft"
+            },
+            {
+                question: "Who is the creator of 'The Legend of Zelda' series?",
+                image: "https://via.placeholder.com/300",
+                answers: ["Shigeru Miyamoto", "Hideo Kojima", "Satoru Iwata", "Satoshi Tajiri"],
+                correctAnswer: "Shigeru Miyamoto"
+            },
+            {
+                question: "Which company developed the game 'Fortnite'?",
+                image: "https://via.placeholder.com/300",
+                answers: ["Epic Games", "Activision", "Blizzard Entertainment", "Ubisoft"],
+                correctAnswer: "Epic Games"
+            }
+        ];
+
+        const questionContainer = document.getElementById('question-container');
+        const submitBtn = document.getElementById('submit-btn');
+        const resultDiv = document.getElementById('result');
+
+        let currentQuestion = 0;
+        let score = 0;
+
+        function displayQuestion() {
+            const question = questions[currentQuestion];
+            questionContainer.innerHTML = `
+                <h2>${question.question}</h2>
+                <img class="question-image" src="${question.image}" alt="Question Image">
+                <div class="answers">
+                    ${question.answers.map(answer => `
+                        <label>
+                            <input type="radio" name="answer" value="${answer}">
+                            ${answer}
+                        </label>
+                    `).join('')}
+                </div>
+            `;
+        }
+
+        function checkAnswer() {
+            const selectedAnswer = document.querySelector('input[name="answer"]:checked');
+            if (!selectedAnswer) {
+                alert('Please select an answer!');
+                return;
+            }
+
+            if (selectedAnswer.value === questions[currentQuestion].correctAnswer) {
+                score++;
+            }
+
+            currentQuestion++;
+
+            if (currentQuestion < questions.length) {
+                displayQuestion();
+            } else {
+                showResult();
+            }
+        }
+
+        function showResult() {
+            questionContainer.style.display = 'none';
+            submitBtn.style.display = 'none';
+            resultDiv.innerText = `You scored ${score}/${questions.length}`;
+        }
+
+        displayQuestion();
+
+        submitBtn.addEventListener('click', checkAnswer);
+    </script>
+</body>
+</html>

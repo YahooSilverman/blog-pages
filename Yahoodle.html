@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Yahoodle</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    #container {
+      text-align: center;
+    }
+    input {
+      text-transform: uppercase;
+      width: 30px;
+      text-align: center;
+    }
+    .result {
+      margin-top: 10px;
+      text-align: left;
+    }
+  </style>
+</head>
+<body>
+  <div id="container">
+    <h1>Yahoodle</h1>
+    <div>
+      <label for="guess">Enter a 5 digit word:</label>
+      <input type="text" id="guess" maxlength="5">
+      <button onclick="checkGuess()">Test</button>
+    </div>
+    <div class="result" id="result"></div>
+  </div>
+
+  <script>
+    // Generate a random 5-letter word
+    const words = ['apple', 'banana', 'grape', 'mango', 'kiwi', 'peach', 'melon', 'lemon', 'cherry', 'orange'];
+    let secretWord = words[Math.floor(Math.random() * words.length)];
+    console.log(secretWord); // For testing purposes
+
+    let attempts = 0;
+
+    function checkGuess() {
+      const guessInput = document.getElementById('guess');
+      const guess = guessInput.value.trim().toLowerCase();
+      if (guess.length !== 5) {
+        alert('Please enter a 5-letter word.');
+        return;
+      }
+      attempts++;
+
+      let result = '';
+      for (let i = 0; i < 5; i++) {
+        if (guess[i] === secretWord[i]) {
+          result += '🟩'; // Correct letter and position
+        } else if (secretWord.includes(guess[i])) {
+          result += '🟨'; // Correct letter but wrong position
+        } else {
+          result += '🟥'; // Incorrect letter
+        }
+      }
+
+      document.getElementById('result').innerHTML += `<div>Attempt ${attempts}: ${guess.toUpperCase()} - ${result}</div>`;
+
+      if (guess === secretWord) {
+        document.getElementById('result').innerHTML += `<div><strong>Congratulations! You guessed the word in ${attempts} attempts.</strong></div>`;
+        document.getElementById('guess').setAttribute('disabled', 'disabled');
+        document.querySelector('button').setAttribute('disabled', 'disabled');
+      } else if (attempts >= 6) {
+        document.getElementById('result').innerHTML += `<div><strong>Sorry! You've used all your attempts. The word was ${secretWord.toUpperCase()}.</strong></div>`;
+        document.getElementById('guess').setAttribute('disabled', 'disabled');
+        document.querySelector('button').setAttribute('disabled', 'disabled');
+      }
+
+      guessInput.value = '';
+    }
+  </script>
+</body>
+</html>

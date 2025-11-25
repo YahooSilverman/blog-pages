@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catch the Falling Objects Game</title>
+    <style>
+        /* CSS */
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        canvas {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- HTML -->
+    <canvas id="gameCanvas" width="400" height="600"></canvas>
+
+    <!-- JavaScript -->
+    <script>
+        // Game variables
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
+        const platformWidth = 80;
+        const platformHeight = 20;
+        const objectWidth = 20;
+        const objectHeight = 20;
+        const objectSpeed = 2;
+
+        let platformX = (canvas.width - platformWidth) / 2;
+        let objects = [];
+        let score = 0;
+
+        // Platform movement
+        let moveLeft = false;
+        let moveRight = false;
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowLeft') moveLeft = true;
+            if (e.key === 'ArrowRight') moveRight = true;
+        });
+
+        document.addEventListener('keyup', (e) => {
+            if (e.key === 'ArrowLeft') moveLeft = false;
+            if (e.key === 'ArrowRight') moveRight = false;
+        });
+
+        // Function to draw the platform
+        function drawPlatform() {
+            ctx.fillStyle = 'blue';
+            ctx.fillRect(platformX, canvas.height - platformHeight, platformWidth, platformHeight);
+        }
+
+        // Function to draw an object
+        function drawObject(object) {
+            ctx.fillStyle = 'red';
+            ctx.fillRect(object.x, object.y, objectWidth, objectHeight);
+        }
+
+        // Function to update the platform's position
+        function updatePlatform() {
+            if (moveLeft && platformX > 0) {
+                platformX -= 5;
+            }
+            if (moveRight && platformX < canvas.width - platformWidth) {
+                platformX += 5;
+            }
+        }
+
+        // Function to update the objects' positions
+        function updateObjects() {
+            for (const object of objects) {
+                object.y += objectSpeed;
+                // Check for collision with platform
+                if (object.y + objectHeight > canvas.height - platformHeight &&
+                    object.x > platformX &&
+                    object.x + objectWidth < platformX + platformWidth) {
+                    // Remove object and increase score
+                    objects = objects.filter(o => o !== object);
+                    score++;
+                }
+            }
+
+            // Remove objects that have fallen off screen
+            objects = objects.filter(object => object.y <= canvas.height);
+        }
+
+        // Function to create a new falling object
+        function createObject() {
+            const x = Math.random() * (canvas.width - objectWidth);
+            const object = {
+                x: x,
+                y: 0
+            };
+            objects.push(object);
+        }
+
+        // Function to draw the score
+        function drawScore() {
+            ctx.font = '16px Arial';
+            ctx.fillStyle = 'black';
+            ctx.fillText(`Score: ${score}`, 10, 20);
+        }
+
+        // Game loop
+        function gameLoop() {
+            // Clear the canvas
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // Draw platform
+            drawPlatform();
+
+            // Draw objects
+            for (const object of objects) {
+                drawObject(object);
+            }
+
+            // Update platform position
+            updatePlatform();
+
+            // Update objects positions
+            updateObjects();
+
+            // Draw score
+            drawScore();
+
+            // Create a new object at regular intervals
+            if (Math.random() < 0.02) {
+                createObject();
+            }
+
+            // Request the next animation frame
+            requestAnimationFrame(gameLoop);
+        }
+
+        // Start the game loop
+        gameLoop();
+    </script>
+</body>
+
+</html>
